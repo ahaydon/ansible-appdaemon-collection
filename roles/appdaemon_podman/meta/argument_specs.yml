@@ -1,0 +1,31 @@
+---
+argument_specs:
+  main:
+    short_description: Main entrypoint for the podman_appdaemon role
+    description:
+      - This is the main entrypoint for the C(podman_appdaemon) role.
+    author: Adam Haydon
+    options:
+      appdaemon_podman_home:
+        type: path
+        required: true
+        description:
+          - The path for the config and data.
+
+      appdaemon_podman_name:
+        type: str
+        default: appdaemon
+        description:
+          - Name of the container and service.
+
+      appdaemon_podman_version:
+        type: str
+        default: latest
+        description:
+          - The tag to use for the AppDaemon container image.
+
+      appdaemon_podman_user:
+        type: str
+        default: appdaemon
+        description:
+          - The name of the user to run the Podman container.

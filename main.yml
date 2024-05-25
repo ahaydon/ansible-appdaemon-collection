@@ -1,0 +1,16 @@
+---
+- name: Deploy AppDaemon
+  hosts: all
+
+  vars:
+    appdaemon_user: appdaemon
+
+  roles:
+    - role: ahaydon.podman.podman_user
+      podman_user_name: "{{ appdaemon_user }}"
+      become: yes
+
+    - role: appdaemon_podman
+      appdaemon_podman_user: "{{ appdaemon_user }}"
+      appdaemon_podman_home: "{{ podman_user_home }}"
+

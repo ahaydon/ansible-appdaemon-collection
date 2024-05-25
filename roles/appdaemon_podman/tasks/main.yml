@@ -1,0 +1,23 @@
+---
+- name: Create AppDaemon data directory
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ appdaemon_podman_user }}"
+    group: "{{ appdaemon_podman_group }}"
+    mode: "0770"
+  become: yes
+  loop:
+    - "{{ appdaemon_podman_home }}/conf"
+
+- name: Create AppDaemon web container
+  ansible.builtin.include_role:
+    name: ahaydon.podman.podman_systemd
+  vars:
+    podman_systemd_name: "{{ appdaemon_podman_name }}"
+    podman_systemd_image: docker.io/acockburn/appdaemon:{{ appdaemon_podman_version }}
+    podman_systemd_user: "{{ appdaemon_podman_user }}"
+    podman_systemd_ports:
+      - 5050:5050
+    podman_systemd_volumes:
+      - "{{ appdaemon_podman_home }}/conf:/conf"

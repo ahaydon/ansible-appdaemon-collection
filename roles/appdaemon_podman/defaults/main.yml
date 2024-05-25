@@ -1,0 +1,5 @@
+---
+appdaemon_podman_name: appdaemon
+appdaemon_podman_user: appdaemon
+appdaemon_podman_group: "{{ appdaemon_podman_user }}"
+appdaemon_podman_version: latest
